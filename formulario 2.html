@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="UTF-8">
+        <title>Validação de Formulário</title>
+        <style>
+            body{
+                margin:0;
+                font-family:Arial,sans-serif;
+                background:linear-gradient(135deg,#4f46e5,#06b6d4);
+                display:grid;
+                place-items:center;
+                height:100vh;
+                color:#fff;
+            }
+            .box{
+                width:90%;
+                max-width:420px;
+                padding:25px;
+                border-radius:20px;
+                background:#ffffff22;
+            }
+            h1,p,#message{text-align:center}
+            label{
+                display:block;
+                margin-top:12px;
+                font-weight:bold;
+            }
+            input,button{
+                width:100%;
+                margin-top:8px;
+                padding:12px;
+                border:0;
+                border-radius:10px;
+                box-sizing:border-box;
+                font-size:16px;
+            }
+            button{
+                margin-top:16px;
+                background:#22c55e;
+                color:#fff;
+                font-weight:bold;
+                cursor:pointer;
+            }
+            #message{
+                margin-top:14px;
+                font-weight:bold;
+            }
+        </style>
+    </head>
+
+        <body>
+            <div class="box">
+                <h1>Cadastro Aluno</h1>
+                <p>Preencha os campos abaixo.</p>
+
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" placeholder="Digite seu nome"></input>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Digite seu email"></input>
+
+                <label for="idade">Idade</label>
+                <input type="number" id="idade" placeholder="idade a partir de 18 anos"></input>
+
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" placeholder="Cidade"></input>
+
+                <button onclick="validar()">Enviar</button>
+
+            <div id="mensagem"></div>
+            </div>
+            <script>
+                function validar(){
+                    var nome = document.getElementById("nome").value;
+                    var email = document.getElementById("email").value;
+                    var idade = document.getElementById("idade").value;
+                    var cidade = document.getElementById("cidade");
+                    var mensagem = document.getElementById("mensagem");
+                    
+                    if(nome == "" || email == "" || idade == "" || cidade == ""){
+                        mensagem.textContent = "Preencha todos os campos!";
+                    } else if(idade < 18){
+                        mensagem.textContent = "Idade inválida!";
+                    } else {
+                        mensagem.textContent = "Formulário enviado com sucesso!";
+                        document.getElementById("nome").value = "";
+                        document.getElementById("email").value = "";
+                        document.getElementById("idade").value = "";
+                        document.getElementById("cidade").value = "";
+                    }
+                }
+            </script>
+        </body>
+</html>

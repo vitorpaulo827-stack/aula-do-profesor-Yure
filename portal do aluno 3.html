@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Portal do Aluno</title>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f6f9;
+  margin:0;
+}
+header{
+  background:#2c3e50;
+  color:#fff;
+  padding:15px;
+  text-align:center;
+  font-size:22px;
+}
+.container{
+  max-width:500px;
+  margin:30px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+}
+button{
+  width:100%;
+  padding:10px;
+  background:#2c3e50;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+button:hover{
+  background:#34495e;
+}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<header>Portal do Aluno</header>
+
+<div class="container" id="login">
+  <h3>Acesso do Aluno</h3>
+  <input type="text" id="user" placeholder="Usuário">
+  <input type="password" id="pass" placeholder="Senha">
+  <button onclick="entrar()">Entrar</button>
+  <p>Não possui cadastro? <a href="#" onclick="mostrarCadastro()">Cadastrar</a></p>
+</div>
+
+<div class="container hidden" id="cadastro">
+  <h3>Cadastro do Aluno</h3>
+  <input type="text" id="nome" placeholder="Nome completo">
+  <input type="text" id="novoUser" placeholder="Usuário">
+  <input type="password" id="novaSenha" placeholder="Senha">
+  <button onclick="cadastrar()">Cadastrar</button>
+</div>
+
+<div class="container hidden" id="painel">
+  <h3>Dados do Aluno</h3>
+  <p id="nomeAluno"></p>
+  <p id="matriculaAluno"></p>
+
+  <h4>Notas</h4>
+  <p>Informática: 8.5</p>
+  <p>Segurança do Trabalho: 7.0</p>
+  <p>Enfermagem: 9.0</p>
+
+  <h4>Situação</h4>
+  <p>Aprovado</p>
+
+  <h4>Matérias</h4>
+  <p>Informática, Segurança do Trabalho, Enfermagem</p>
+</div>
+
+<script>
+function mostrarCadastro(){
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('cadastro').classList.remove('hidden');
+}
+
+function cadastrar(){
+  localStorage.setItem('usuario', document.getElementById('novoUser').value);
+  localStorage.setItem('senha', document.getElementById('novaSenha').value);
+  localStorage.setItem('nome', document.getElementById('nome').value);
+  localStorage.setItem('matricula', Math.floor(Math.random()*10000));
+
+  alert('Cadastro realizado com sucesso.');
+
+  document.getElementById('cadastro').classList.add('hidden');
+  document.getElementById('login').classList.remove('hidden');
+}
+
+function entrar(){
+  const user = document.getElementById('user').value;
+  const pass = document.getElementById('pass').value;
+
+  if(user === localStorage.getItem('usuario') && pass === localStorage.getItem('senha')){
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('painel').classList.remove('hidden');
+
+    document.getElementById('nomeAluno').innerText = 'Nome: ' + localStorage.getItem('nome');
+    document.getElementById('matriculaAluno').innerText = 'Matrícula: ' + localStorage.getItem('matricula');
+  }else{
+    alert('Usuário ou senha inválidos.');
+  }
+}
+</script>
+
+</body>
+</html>
